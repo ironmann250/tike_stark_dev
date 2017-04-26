@@ -46,6 +46,7 @@ def sell(request):
             element = ticket_types[-1]
             ticketdict[element]=(tickobj.amount)
         show = Show.objects.get(title = event)
+        
         total = show.tickets_no 
         soldobj = list()
         stobj = list()
@@ -69,6 +70,7 @@ def sell(request):
         usage = request.POST['usage'] 
         pin = id_generator()
         eventobj= Show.objects.get(title = event)
+        venu= eventobj.venu
         sellerobj= profile.objects.get(seller__username = username)
         tobj= tickettype.objects.get(tike_types = ticket_type)
         fee = tobj.amount
