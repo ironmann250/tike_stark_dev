@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',auth_views.login, {'template_name': 'html/essay/login.html'}),
+     url(r'^login/$',auth_views.login, {'template_name': 'html/essay/login.html'}),
     url(r'^logout/$',auth_views.logout, {'next_page': '/login/'}),
     url(r'^sell/',tickapp_views.sell),
     url(r'^transfer/',tickapp_views.transfer),
