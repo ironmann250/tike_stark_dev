@@ -27,6 +27,8 @@ class profile(models.Model):
     seller = models.ForeignKey(User)
     iduser = models.CharField(primary_key=True, max_length = 40)
     event = models.ForeignKey(Show, default="0")
+    def __str__(self):
+        return self.iduser
 
 
 ''' @receiver(post_save, sender=User)
@@ -68,6 +70,8 @@ class ticket(models.Model):
     Name = models.CharField(max_length=100)
     ticket_type = models.ForeignKey(tickettype, null=True)
     status = models.BooleanField(default=False)
+    def __str__(self):
+        return self.Name
     
 
 
