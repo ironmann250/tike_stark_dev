@@ -87,7 +87,7 @@ def sell(request):
                 htmlmsg = render_to_string('html/essay/email.html',{'event':event,'names': name,'ticket_type':ticket_type,'fee': fee,'date':datetime,'pin':pin,'sold':sold1})
                 send_mail('Your ticket to attend the event','',me,email,html_message= htmlmsg, fail_silently= False)
                 newticket= ticket.objects.create()
-                newticket= ticket(idticket = sold1,phone_number = tel, email= email, Name= name, pin = pin, event = eventobj, seller= sellerobj,ticket_type= tobj)
+                newticket= ticket(idticket = pin,phone_number = tel, email= email, Name= name, pin = pin, event = eventobj, seller= sellerobj,ticket_type= tobj)
                 newticket.save()
             except smtplib.SMTPException:
                 return render(request,'html/essay/sell.html',{'view' : 'Sell', 'event': event, 'ticket_types' : ticket_types, 'action': True,'username':username,'st': st, 'income': sum,'ticketdict': ticketdict , 'total': total,'sold': sold,'perc': perc,'email':email,'pin':pin})
@@ -116,7 +116,7 @@ def sell(request):
                 sold = sold + 1
                 perc = (sold/total)* 120
                 newticket= ticket.objects.create()
-                newticket= ticket(idticket = sold1,phone_number = tel, email= email, Name= name, pin = pin, event = eventobj, seller= sellerobj,ticket_type= tobj)
+                newticket= ticket(idticket = pin,phone_number = tel, email= email, Name= name, pin = pin, event = eventobj, seller= sellerobj,ticket_type= tobj)
                 newticket.save()
                 print(pin)
                 return render(request,'html/essay/sell.html',{'view' : 'Sell', 'event': event, 'ticket_types' : ticket_types, 'action': False,'username':username,'st':st,'income': sum,'ticketdict': ticketdict,'total': total,'sold': sold,'perc': perc,'tel': tel })
