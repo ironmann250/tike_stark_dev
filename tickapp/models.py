@@ -64,9 +64,9 @@ class ticket(models.Model):
     phone_number = models.IntegerField(null=True)
     pin = models.CharField(max_length=10)
     email = models.EmailField()
-    seller = models.ForeignKey(profile, default="0", null=True)
-    Name = models.CharField(max_length=100, default="0")
-    ticket_type = models.ForeignKey(tickettype, default="0", null=True)
+    seller = models.ForeignKey(profile, null=True)
+    Name = models.CharField(max_length=100)
+    ticket_type = models.ForeignKey(tickettype, null=True)
     status = models.BooleanField(default=False)
     
 
