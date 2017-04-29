@@ -51,7 +51,7 @@ class tickettype(models.Model):
     idticktype = models.CharField(primary_key=True,max_length =30)
 
     def __str__(self):
-        return self.tike_type
+        return self.tike_types
 
 
 class Admin:
