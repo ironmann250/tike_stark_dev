@@ -8,7 +8,7 @@ from django.dispatch import receiver
 
 
 class Show(models.Model):
-    id = models.CharField(max_length=10,primary_key=True)
+    idshow = models.CharField(max_length=10,primary_key=True)
     title = models.CharField(max_length=100)
     poster = models.ImageField(upload_to="media/img")
     video = models.FileField(upload_to="media/video")
@@ -27,7 +27,7 @@ class Admin:
 
 class profile(models.Model):
     seller = models.ForeignKey(User)
-    id = models.CharField(primary_key=True, max_length = 40)
+    iduser = models.CharField(primary_key=True, max_length = 40)
     event = models.ForeignKey(Show, default="0")
 
 
@@ -50,7 +50,7 @@ class tickettype(models.Model):
     tike_types = models.CharField(max_length=30)
     event = models.ForeignKey(Show)
     amount = models.IntegerField()
-    id = models.CharField(primary_key=True,max_length =30)
+    idticktype = models.CharField(primary_key=True,max_length =30)
 
     def __str__(self):
         return self.tike_type
@@ -64,7 +64,7 @@ class ticket(models.Model):
     event = models.ForeignKey(Show, null=True)
     phone_number = models.IntegerField(null=True)
     pin = models.CharField(max_length=10)
-    id = models.CharField(max_length=20, primary_key= True, default= "0")
+    idtikect = models.CharField(max_length=20, primary_key= True, default= "0")
     email = models.EmailField()
     seller = models.ForeignKey(profile, default="0", null=True)
     Name = models.CharField(max_length=100, default="0")
