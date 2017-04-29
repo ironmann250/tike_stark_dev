@@ -61,7 +61,6 @@ class Admin:
 
 
 class ticket(models.Model):
-    idticket = models.CharField(max_length=20, primary_key= True)
     event = models.ForeignKey(Show, null=True)
     phone_number = models.IntegerField(null=True)
     pin = models.CharField(max_length=10)
