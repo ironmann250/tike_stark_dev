@@ -63,7 +63,7 @@ class Admin:
 class ticket(models.Model):
     event = models.ForeignKey(Show, null=True)
     phone_number = models.IntegerField(null=True)
-    pin = models.CharField(max_length=10)
+    pin = models.CharField(max_length=10, primary_key=True)
     email = models.EmailField()
     seller = models.ForeignKey(profile, null=True)
     Name = models.CharField(max_length=100)
