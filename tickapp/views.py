@@ -50,7 +50,7 @@ def sell(request):
         soldobj = list()
         stobj = list()
         sumofsalesobj=list()
-        sumofsalesobjs = ticket.objects.filter(seller__seller__username =username)
+        sumofsalesobjs = ticket.objects.filter(seller =username)
         sum = 0
         for sumofsalesobj in sumofsalesobjs:
             sum= sum + sumofsalesobj.ticket_type.amount
