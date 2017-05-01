@@ -87,7 +87,7 @@ def sell(request):
                 htmlmsg = render_to_string('html/essay/email.html',{'event':event,'names': name,'ticket_type':ticket_type,'fee': fee,'date':datetime,'pin':pin,'sold':sold1})
                 send_mail('Your ticket to attend the event','',me,email,html_message= htmlmsg, fail_silently= False)
                 newticket= ticket.objects.create()
-                newticket= ticket(phone_number = tel, email= email, Name= name, pin = pin, event = eventobj, seller= sellerobj,ticket_type= tobj)
+                newticket= ticket(phone_number = tel, email= email, Name= name, pin = pin, event = event, seller= username,ticket_type= fee)
                 newticket.save()
             except smtplib.SMTPException:
                 return render(request,'html/essay/sell.html',{'view' : 'Sell', 'event': event, 'ticket_types' : ticket_types, 'action': True,'username':username,'st': st, 'income': sum,'ticketdict': ticketdict , 'total': total,'sold': sold,'perc': perc,'email':email,'pin':pin})
@@ -95,7 +95,7 @@ def sell(request):
             total = total
             st = st + 1
             sold = sold + 1
-            perc = (sold/total)* 120
+            perc = (sold/total)* 100
             return render(request,'html/essay/sell.html',{'view' : 'Sell', 'event': event, 'ticket_types' : ticket_types, 'action': False,'username':username,'st':st,'income': 0,'ticketdict': ticketdict,'total': total,'sold': sold,'perc': perc,'email':email })
         if usage == '1':
             
@@ -114,9 +114,9 @@ def sell(request):
                 sum = sum + fee
                 st = st + 1
                 sold = sold + 1
-                perc = (sold/total)* 120
+                perc = (sold/total)* 100
                 newticket= ticket.objects.create()
-                newticket= ticket(phone_number = tel, email= email, Name= name, pin = pin, event = eventobj, seller= sellerobj,ticket_type= tobj)
+                newticket= ticket(phone_number = tel, email= email, Name= name, pin = pin, event = event, seller= username,ticket_type= fee)
                 newticket.save()
                 print(pin)
                 return render(request,'html/essay/sell.html',{'view' : 'Sell', 'event': event, 'ticket_types' : ticket_types, 'action': False,'username':username,'st':st,'income': sum,'ticketdict': ticketdict,'total': total,'sold': sold,'perc': perc,'tel': tel })
