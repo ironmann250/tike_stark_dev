@@ -53,7 +53,7 @@ def sell(request):
         sumofsalesobjs = ticket.objects.filter(seller =username)
         sum = 0
         for sumofsalesobj in sumofsalesobjs:
-            sum= sum + sumofsalesobj.ticket_type.amount
+            sum= sum + sumofsalesobj.ticket_type
         soldobj = ticket.objects.filter(event= show)
         sold= len(soldobj)
         stobj = ticket.objects.filter(event = event, seller= objs)
