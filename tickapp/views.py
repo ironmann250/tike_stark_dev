@@ -264,7 +264,5 @@ def applogin(request):
             else:
                 result = {'status': False}
                 return JsonResponse(result)
-        except User.DoesNotExist:
-            result = {'status': False}
-            return JsonResponse(result)  
+
             
