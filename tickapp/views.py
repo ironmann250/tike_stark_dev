@@ -255,11 +255,15 @@ def applogin(request):
     if request.method == 'GET':
         username = request.GET['username']
         password = request.GET['password']
-        profobj = User.objects.get(Q(username__exact = username))
-        tpassword = profobj.password
-        if password == tpassword :
-            result = {'status':True}
-            return JsonResponse(result)
-        else:
+        try:
+            profobj = User.objects.get(Q(username__exact = username))
+            tpassword = profobj.password
+            if password == tpassword :
+                result = {'status':True}
+                return JsonResponse(result)
+            else:
+                result = {'status': False}
+                return JsonResponse(result)
+        except User.DoesNotExist:
             result = {'status': False}
-            return JsonResponse(result)
+            return JsonResponse(result)  
