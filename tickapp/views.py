@@ -6,6 +6,7 @@ from tickapp.models import profile,ticket,tickettype,Show
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.core.mail import send_mail
+from django.http import JsonResponse
 # Create a pin code
 import random
 import string
@@ -240,18 +241,15 @@ def result(request):
                 status = True
                 tickobj.save()
                 result= {'status':status,'owner':owner,'ticket_type': ticket_type,'pin':pin}
-                jsonresult = json.dumps(result)
-                return jsonresult
+                return JsonResponse(result)
             else:
                 status = False
                 result= {'status':status,'owner':owner,'ticket_type': ticket_type,'pin':pin} 
-                jsonresult = json.dumps(result)
-                return jsonresult
+                return JsonResponse(result)
         except ticket.DoesNotExist:
             status = False
-            result= {'status':status,'owner':owner,'ticket_type': ticket_type,'pin':pin} 
-            jsonresult = json.dumps(result)
-            return jsonresult
+            result= {'status': False} 
+            return JsonResponse(result)
 
 def applogin(request):
     if request.method == 'GET':
@@ -262,14 +260,11 @@ def applogin(request):
             tpassword = profobj.password
             if password == tpassword :
                 result = {'status':True}
-                jsonresult= json.dumps(result)
-                return jsonresult
+                return JsonResponse(result)
             else:
                 result = {'status': False}
-                jsonresult= json.dumps(result)
-                return jsonresult 
+                return JsonResponse(result)
         except User.DoesNotExist:
             result = {'status': False}
-            jsonresult= json.dumps(result)
-            return jsonresult 
+            return JsonResponse(result)  
             
