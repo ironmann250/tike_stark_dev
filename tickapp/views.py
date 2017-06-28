@@ -266,5 +266,10 @@ def applogin(request):
                 return jsonresult
             else:
                 result = {'status': False}
+                jsonresult= json.dumps(result)
+                return jsonresult 
         except User.DoesNotExist:
             result = {'status': False}
+            jsonresult= json.dumps(result)
+            return jsonresult 
+            
