@@ -234,7 +234,7 @@ def result(request):
         try:
             tickobj=ticket.objects.get(Q(pin__exact = pin))
             owner= tickobj.Name
-            ticket_type = tickobj.ticket_types
+            ticket_type = tickobj.ticket_type
             status = tickobj.status
             if(status == False):
                 tickobj.status = True
