@@ -1,26 +1,37 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
+import datetime
 
 # Create your models here.
+
 class Show(models.Model):
-	title = models.CharField( max_length=100)
-	poster = models.ImageField(upload_to="media/img")
-	video =  models.FileField(upload_to= "media/video")
-	Description = models.TextField()
-	date= models.DateTimeField()
-	tickets_no = models.IntegerField()
-	def __str__(self):
-		return self.title
+    #idshow = models.CharField(max_length=10,primary_key=True) #why did you do this ;(
+    title = models.CharField(max_length=100)
+    Description = models.TextField(null=True,default='')
+    date = models.DateTimeField()
+    venue = models.CharField(max_length=100, default="0")
+    tickets_no = models.IntegerField()
+    supervisor=models.ForeignKey(User,default='0')
+
+    def __str__(self):
+        return self.title
+
 
 class Admin:
-	pass
+    pass
+
 
 class profile(models.Model):
-	seller = models.ForeignKey(User)
-	event = models.ForeignKey(Show, default = "0")
-	
+    seller = models.ForeignKey(User)
+    #iduser = models.CharField(primary_key=True, max_length = 40) #again seriously i wonder what's beneath
+    event = models.ForeignKey(Show, default="0")
+    def __str__(self):
+        return self.seller.username
+
+
 ''' @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -33,31 +44,37 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Admin:
-	pass
+    pass
+
 
 class tickettype(models.Model):
-	amount = models.IntegerField()
-	event = models.ForeignKey(Show)
-	tike_type = models.CharField(max_length = 30)
+    tike_type = models.CharField(max_length=100)
+    event = models.ForeignKey(Show)
+    amount = models.IntegerField()
+    #idticktype = models.CharField(primary_key=True,max_length =30) #this is just poor codes
 
-	def __str__(self):
-		return self.tike_type
+    def __str__(self):
+        return self.tike_type
+
 
 class Admin:
-	pass
+    pass
+
 
 class ticket(models.Model):
-	phone_number = models.IntegerField(null = True)
-	email = models.EmailField()
-	Name = models.CharField(max_length = 100, default="0")
-	pin = models.CharField(max_length = 10)
-	event = models.ForeignKey(Show, null = True)
-	seller = models.ForeignKey(profile, default ="0", null = True)
-	ticket_type = models.ForeignKey(tickettype, default = "0", null = True)
-	status = models.BooleanField(default = False)
+    event = models.CharField(max_length=100, null=True)
+    phone_number = models.IntegerField(null=True)
+    pin = models.CharField(max_length=10)
+    email = models.EmailField(null=True)
+    seller = models.CharField(max_length=20, null=True)
+    Name = models.CharField(max_length=100)
+    ticket_type = models.CharField(max_length=100, null=True)
+    status = models.BooleanField(default=False)
+    date=models.DateTimeField(default=timezone.now())#i hear there is a timezone module go ahead and use it instead
+    def __str__(self):
+        return self.Name
+    
 
-	def __str__(self):
-		return self.Name
 
 class Admin:
-	pass
+    pass
