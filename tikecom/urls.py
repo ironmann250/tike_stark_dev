@@ -15,19 +15,21 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.conf import settings
 from django.contrib.auth import views as auth_views
 from tickapp import views as tickapp_views
 from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^login/$',auth_views.login, {'template_name': 'html/essay/login.html'}),
+    url(r'^$',auth_views.login, {'template_name': 'html/essay/login.html'}),
+     url(r'^login/$',auth_views.login, {'template_name': 'html/essay/login.html'}),
     url(r'^logout/$',auth_views.logout, {'next_page': '/login/'}),
     url(r'^sell/',tickapp_views.sell),
     url(r'^transfer/',tickapp_views.transfer),
     url(r'^restore/',tickapp_views.restore),
     url(r'^check/',tickapp_views.check),
-    url(r'^$',auth_views.login, {'template_name': 'html/essay/login.html'}),
+    url(r'^applogin/',tickapp_views.applogin),
+    url(r'^result/',tickapp_views.result),
+    url(r'^tools/',tickapp_views.tools),
 
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
