@@ -110,9 +110,9 @@ def sell(request):
         if usage == '0':
             try:
                 sold1 = sold +1
-                '''htmlmsg = render_to_string('html/essay/email.html',{'event':event,'names': name,'ticket_type':ticket_type,'fee': fee,'date':datetime,'pin':pin,'sold':sold1})
+                htmlmsg = render_to_string('html/essay/email.html',{'event':event,'names': name,'ticket_type':ticket_type,'fee': fee,'date':datetime,'pin':pin,'sold':sold1})
                 send_mail('Your ticket to attend the event','',me,email,html_message= htmlmsg, fail_silently= False)
-                '''
+                
                 if event not in ['',' ']:
                     #newticket= ticket.objects.create()
                     newticket= ticket(phone_number = tel, email= email, Name= name, pin = pin, event = event, seller= username,ticket_type= ticket_type,date=timezone.now())#change according to model
@@ -136,11 +136,11 @@ def sell(request):
                 api.set_params(msg,Phone,sold1)
                 api.set_to(tel)
                 api.set_from('Tike') #Requested sender name
-                '''
+                
                 result = api.execute()
                 for r in result:
                     print (r.id, r.points, r.status)
-                '''
+                
                 sum_ = sum_ + fee
                 st = st + 1
                 sold = sold + 1
